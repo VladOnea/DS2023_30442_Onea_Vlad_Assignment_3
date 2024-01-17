@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>Manage Devices</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon aria-hidden="false">logout</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card>
+  <b>
+      <span>Manage Device</span>
+  </b>
+  <button mat-flat-button color="primary" class="float-right" (click)="handleAddAction()">
+      <mat-icon>add_circle</mat-icon> Add Device
+  </button>
+</mat-card>
+
+
+<div class="responsive_table">
+  <table mat-table [dataSource]="devices" class="mat-elevation-z8">
+      <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let device"> {{device.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let device"> {{device.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let device"> {{device.address}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EnergyConsumption">
+          <th mat-header-cell *matHeaderCellDef>Energy Consumption</th>
+          <td mat-cell *matCellDef="let device"> {{device.energyConsumption}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="OwnerUsername">
+        <th mat-header-cell *matHeaderCellDef>Owner Username</th>
+        <td mat-cell *matCellDef="let device"> {{device.ownerUsername}} </td>
+    </ng-container>
+
+      <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let device" class="action-link">
+              <button mat-icon-button color="primary" matTooltip="Edit" (click)="handleEditAction(device)">
+                  <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="primary" matTooltip="Delete" (click)="handleDeleteAction(device)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+            
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+      <tr mat-row *matRowDef="let row;columns:displayedColumns;"></tr>
+  </table>
+</div>

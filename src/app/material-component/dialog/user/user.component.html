@@ -1,0 +1,70 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+        <span>{{dialogData.action}} Device</span>
+        <span class="spacer"></span>
+        <button class="mat-dialog-close" mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="userForm">
+        <div fxFlex fxLayout="column">
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="standard" fxFlex>
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" required>
+                    <mat-error *ngIf="userForm.controls.username.touched && userForm.controls.username.invalid">
+                        <span *ngIf="userForm.controls.username.errors.required">This field is mandatory!</span>
+                        <span *ngIf="userForm.controls.username.errors.pattern">This field is invalid!</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="standard" fxFlex>
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber" required>
+                    <mat-error *ngIf="userForm.controls.phoneNumber.touched && userForm.controls.phoneNumber.invalid">
+                        <span *ngIf="userForm.controls.phoneNumber.errors.required">This field is mandatory!</span>
+                        <span *ngIf="userForm.controls.phoneNumber.errors.pattern">This field is invalid!</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="standard" fxFlex>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+                        <span *ngIf="userForm.controls.email.errors.required">This field is mandatory!</span>
+                        <span *ngIf="userForm.controls.email.errors.pattern">This field is invalid!</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row wrap">
+                <mat-form-field appearance="standard" fxFlex>
+                    <mat-label>Role</mat-label>
+                    <input matInput formControlName="role" required>
+                    <mat-error *ngIf="userForm.controls.role.touched && userForm.controls.role.invalid">
+                        <span *ngIf="userForm.controls.role.errors.required">This field is mandatory!</span>
+                        <span *ngIf="userForm.controls.role.errors.pattern">This field is invalid!</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(userForm.valid && userForm.dirty)">
+        <mat-icon>save</mat-icon> {{action}}
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon> Close
+    </button>
+</mat-dialog-actions>
+
+

@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+    <h1>Admin Chat</h1>
+</mat-toolbar>
+<div class="content">
+    <div class="chat-box">
+        <mat-card class="chat-window">
+            <mat-card-header>
+                <mat-card-title>
+                    Welcome {{ loggedInUser?.username }} to the Chat!
+                </mat-card-title>
+            </mat-card-header>
+
+            <div class="chat-container">
+                <ng-container *ngIf="availableChats.length > 0; else noChats">
+                    <div class="persons-container">
+                        <button
+                            class="chat-person"
+                            *ngFor="let availableChat of availableChats"
+                            (click)="selectChat(availableChat.user)"
+                            [ngClass]="{
+                                'active-chat':
+                                    selectedChat?.user === availableChat.user
+                            }"
+                        >
+                            {{ availableChat.user }}
+                        </button>
+                    </div>
+                </ng-container>
+
+                <ng-template #noChats>
+                    <button class="chat-person">No chats</button>
+                </ng-template>
+
+                <mat-card-content class="messages-container">
+                    <div
+                        *ngFor="let message of selectedChat?.messages"
+                        [ngClass]="{
+                            own: message.from === loggedInUser?.username
+                        }"
+                    >
+                        {{ message.message }}
+                    </div>
+                    <mat-card-actions>
+                        <input
+                            matInput
+                            placeholder="Type a message"
+                            [(ngModel)]="newMessage"
+                        />
+                        <button
+                            mat-button
+                            (click)="sendMessage(selectedChat!.user)"
+                        >
+                            Send
+                        </button>
+                    </mat-card-actions>
+                </mat-card-content>
+            </div>
+        </mat-card>
+    </div>
+</div>
